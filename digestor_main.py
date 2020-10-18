@@ -3,15 +3,11 @@
 import os
 import sys
 import time
+import digestor_migration as migration
 
 # Global variables
 PMEM_HOME="/mnt/pmem/pmem"
 SSD_HOME="/mnt/ssd"
-
-# Migrate files
-def migration():
-    os.system("mv /mnt/pmem/pmem/dummy /mnt/ssd/")
-    print("migration!!!")
 
 # Check remaining space periodically
 while True:
@@ -26,8 +22,13 @@ while True:
     pmem_stat = int(list(pmem_stat.split())[4][:-1])
     print(pmem_stat)
     
-    # If remaining space is above the threshold
-    if pmem_stat >= 20:
-        migration()
+    # If remaining space is above the pm threshold
+    if pmem_stat <= 50:
+        migration.migration_to_upper()
+
+    # If remaining space is the threshold
+    if pmem_stat >= 80:
+        migration.migration_to_lower()
+
     time.sleep(1)
 
