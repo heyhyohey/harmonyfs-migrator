@@ -3,7 +3,7 @@
 import os
 import sys
 import time
-import digestor_migration as migration
+import digestor_migrator as migration
 
 # Global variables
 PMEM_HOME="/mnt/pmem/pmem"
