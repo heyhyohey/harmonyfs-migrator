@@ -1,0 +1,10 @@
+1. devices
+dev_name	mnt_dir		role
+/dev/pmem0	/mnt/pmem	upper device (dram)
+/dev/sdb1	/mnt/lower	lower device (ssd)
+
+2. directories
+/mnt/lower		lower directory
+/mnt/pmem/upper	upper directory
+/mnt/pmem/work	working directory
+/mmt/merged		merged directory
