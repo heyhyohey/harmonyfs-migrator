@@ -5,8 +5,10 @@ mkfs -t ext4 /dev/pmem0
 mount -o dax /dev/pmem0 /mnt/pmem
 
 # make filesystem on /dev/pmem0 and mount dax filesystem
+:<<'COMMEND'
 mkfs -t ext4 /dev/sdb
 mount /dev/sdb /mnt/lower
+COMMEND
 
 # make directories
 mkdir /mnt/pmem/work

@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-rm -rf /mnt/ssd/*
-rm -rf /mnt/pmem/pmem/*
+rm -rf /mnt/lower/*
+rm -rf /mnt/pmem/upper/*
