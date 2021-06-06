@@ -15,7 +15,7 @@ def migration_to_lower(upper_dir_path, lower_dir_path, merged_dir_path):
     picked_file = picker.pick_from_dir(upper_dir_path)
 
     if picked_file == None:
-        print("No files in the " + upper_dir_path)
+        print("No files in the " + merged_dir_path)
         return
 
     from_path = merged_dir_path + picked_file.replace(upper_dir_path, "")
@@ -43,6 +43,6 @@ def migration_to_upper(upper_dir_path, lower_dir_path, merged_dir_path):
 
 
 if __name__ == "__main__":
-    #migration_to_lower("/mnt/pmem/upper", "/mnt/lower", "/mnt/merged")
+    migration_to_lower("/mnt/pmem/upper", "/mnt/lower", "/mnt/merged")
     #migration_to_upper("/mnt/pmem/upper", "/mnt/lower", "/mnt/merged")
-    check_path("/hello/my/name/is")
+    #check_path("/hello/my/name/is")
