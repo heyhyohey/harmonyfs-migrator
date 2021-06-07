@@ -1,3 +1,8 @@
 #!/bin/bash
 
-python3 harmonyfs_main.py /mnt/pmem/upper/ /mnt/lower/ /mnt/merged/ access
+if [ $# -ne 4 ]; then
+	echo "Usage: ./run.sh [upper_layer] [lower_layer] [merged_layer] [policy]"
+	exit 1
+fi
+
+python3 harmonyfs_main.py $1 $2 $3 $4
