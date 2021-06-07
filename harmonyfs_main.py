@@ -2,15 +2,17 @@ import os
 import sys
 import time
 import harmonyfs_migrator as migrator
+import harmonyfs_file_picker as picker
 
 # Global variables
-if len(sys.argv) != 4:
-    print("Usage: python3 digestor_main.py [upper_layer_path] [lower_layer_path] [merged_layer_path]")
+if len(sys.argv) != 5:
+    print("Usage: python3 digestor_main.py [upper_layer_path] [lower_layer_path] [merged_layer_path] [policy]")
     sys.exit(1)
 
-UPPER_HOME=sys.argv[1]
-LOWER_HOME=sys.argv[2]
-MERGED_HOME=sys.argv[3]
+UPPER_HOME = sys.argv[1]
+LOWER_HOME = sys.argv[2]
+MERGED_HOME = sys.argv[3]
+picker.policy = sys.argv[4]
 
 # Remove the last '/'
 if UPPER_HOME[-1] == "/":
@@ -24,6 +26,7 @@ print("HarmoyFS Migrator")
 print("Upper layer: " + UPPER_HOME)
 print("Lower layer: " + LOWER_HOME)
 print("Merged layer: " + MERGED_HOME)
+print("Policy: " + picker.policy)
 
 # Check remaining space periodically
 while True:

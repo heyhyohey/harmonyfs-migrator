@@ -12,7 +12,7 @@ def check_path(path):
         os.makedirs(path)
 
 def migration_to_lower(upper_dir_path, lower_dir_path, merged_dir_path):
-    picked_file = picker.pick_from_dir(upper_dir_path)
+    picked_file = picker.pick_from_dir(upper_dir_path, "upper")
 
     if picked_file == None:
         print("No files in the " + merged_dir_path)
@@ -28,7 +28,7 @@ def migration_to_lower(upper_dir_path, lower_dir_path, merged_dir_path):
     print("Move " + from_path + " to " + to_path)
 
 def migration_to_upper(upper_dir_path, lower_dir_path, merged_dir_path):
-    picked_file = picker.pick_from_dir(lower_dir_path)
+    picked_file = picker.pick_from_dir(lower_dir_path, "lower")
 
     if picked_file == None:
         print("No files in the " + lower_dir_path)
