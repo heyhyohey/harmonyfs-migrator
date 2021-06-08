@@ -39,14 +39,13 @@ while True:
 
     pmem_stat = ' '.join(pmem_stat.split())
     pmem_stat = int(list(pmem_stat.split())[4][:-1])
-    print("Used space of the upper layer: " + str(pmem_stat) + "%")
+    #print("Used space of the upper layer: " + str(pmem_stat) + "%")
     
     # If remaining space is above the pm threshold
     if pmem_stat <= 50:
         migrator.migration_to_upper(UPPER_HOME, LOWER_HOME, MERGED_HOME)
+
     # If remaining space is the threshold
     elif pmem_stat >= 80:
         migrator.migration_to_lower(UPPER_HOME, LOWER_HOME, MERGED_HOME)
-
-    time.sleep(1)
 

@@ -5,4 +5,5 @@ if [ $# -ne 4 ]; then
 	exit 1
 fi
 
+cd ..
 python3 harmonyfs_main.py $1 $2 $3 $4

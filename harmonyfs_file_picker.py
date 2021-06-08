@@ -46,15 +46,19 @@ def pick_mru(files, path):
     while True:
         accessed_dates = os.popen("du --time=access -a " + path + "| awk '{ print $2 }'").read()
         accessed_dates = accessed_dates.split("\n")
-        del accessed_dates[-1:-3:-1]
+        del accessed_dates[-1]
 
         accessed_time = os.popen("du --time=access -a " + path + "| awk '{ print $3 }'").read()
         accessed_time = accessed_time.split("\n")
-        del accessed_time[-1:-3:-1]
+        del accessed_time[-1]
 
         files = os.popen("du --time=access -a " + path + "| awk '{ print $4 }'").read()
         files = files.split("\n")
-        del files[-1:-3:-1]
+        del files[-1]
+
+        dirs = os.popen("du --time=access " + path + "| awk '{ print $4 }'").read()
+        dirs = dirs.split("\n")
+        dirs.remove("")
 
         files_accessed_time = {}
         for accessed_info in zip(files, accessed_dates, accessed_time):
@@ -63,12 +67,17 @@ def pick_mru(files, path):
                     , "%Y-%m-%d %H:%M")
             files_accessed_time[accessed_info[0]] = accessed_datetime
 
+        for dir in dirs:
+            if dir in files_accessed_time:
+                del(files_accessed_time[dir])
+
         picked_file = max(files_accessed_time)
 
         if check_in_use(picked_file) == False:
             break
         else:
-            del(files_accessed_time[picked_file])
+            if picked_file in files_accessed_time:
+                del(files_accessed_time[picked_file])
 
         if files_accessed_time == {}:
             return None
@@ -80,15 +89,19 @@ def pick_lru(files, path):
     while True:
         accessed_dates = os.popen("du --time=access -a " + path + "| awk '{ print $2 }'").read()
         accessed_dates = accessed_dates.split("\n")
-        del accessed_dates[-1:-3:-1]
+        del accessed_dates[-1]
 
         accessed_time = os.popen("du --time=access -a " + path + "| awk '{ print $3 }'").read()
         accessed_time = accessed_time.split("\n")
-        del accessed_time[-1:-3:-1]
+        del accessed_time[-1]
 
         files = os.popen("du --time=access -a " + path + "| awk '{ print $4 }'").read()
         files = files.split("\n")
-        del files[-1:-3:-1]
+        del files[-1]
+
+        dirs = os.popen("du --time=access " + path + "| awk '{ print $4 }'").read()
+        dirs = dirs.split("\n")
+        dirs.remove("")
 
         files_accessed_time = {}
         for accessed_info in zip(files, accessed_dates, accessed_time):
@@ -97,12 +110,17 @@ def pick_lru(files, path):
                     , "%Y-%m-%d %H:%M")
             files_accessed_time[accessed_info[0]] = accessed_datetime
 
+        for dir in dirs:
+            if dir in files_accessed_time:
+                del(files_accessed_time[dir])
+
         picked_file = min(files_accessed_time)
 
         if check_in_use(picked_file) == False:
             break
         else:
-            del(files_accessed_time[picked_file])
+            if picked_file in files_accessed_time:
+                del(files_accessed_time[picked_file])
 
         if files_accessed_time == {}:
             return None
